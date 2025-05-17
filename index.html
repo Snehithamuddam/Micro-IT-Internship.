@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-2xl font-bold text-center mb-4">Password Generator</h1>
+        <div class="space-y-4">
+            <div>
+                <label for="length" class="block text-sm font-medium text-gray-700">Password Length (min 8):</label>
+                <input type="number" id="length" min="8" value="12" class="mt-1 block w-full p-2 border rounded-md">
+            </div>
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700">Include:</label>
+                <div class="flex items-center">
+                    <input type="checkbox" id="uppercase" checked class="mr-2">
+                    <label for="uppercase">Uppercase Letters</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="lowercase" checked class="mr-2">
+                    <label for="lowercase">Lowercase Letters</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="digits" checked class="mr-2">
+                    <label for="digits">Digits</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="special" checked class="mr-2">
+                    <label for="special">Special Characters</label>
+                </div>
+            </div>
+            <button onclick="generatePassword()" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Generate Password</button>
+            <div id="passwordOutput" class="mt-4 p-2 bg-gray-200 rounded-md text-center font-mono break-all"></div>
+        </div>
+    </div>
+
+    <script>
+        function generatePassword() {
+            const length = parseInt(document.getElementById('length').value);
+            const includeUppercase = document.getElementById('uppercase').checked;
+            const includeLowercase = document.getElementById('lowercase').checked;
+            const includeDigits = document.getElementById('digits').checked;
+            const includeSpecial = document.getElementById('special').checked;
+
+            // Character sets
+            const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+            const digits = '0123456789';
+            const special = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+            // Validate inputs
+            if (length < 8) {
+                document.getElementById('passwordOutput').innerText = 'Length must be at least 8!';
+                return;
+            }
+            if (!includeUppercase && !includeLowercase && !includeDigits && !includeSpecial) {
+                document.getElementById('passwordOutput').innerText = 'Select at least one character type!';
+                return;
+            }
+
+            // Build character pool
+            let chars = '';
+            if (includeUppercase) chars += uppercase;
+            if (includeLowercase) chars += lowercase;
+            if (includeDigits) chars += digits;
+            if (includeSpecial) chars += special;
+
+            // Ensure at least one character from each selected type
+            let password = [];
+            if (includeUppercase) password.push(uppercase[Math.floor(Math.random() * uppercase.length)]);
+            if (includeLowercase) password.push(lowercase[Math.floor(Math.random() * lowercase.length)]);
+            if (includeDigits) password.push(digits[Math.floor(Math.random() * digits.length)]);
+            if (includeSpecial) password.push(special[Math.floor(Math.random() * special.length)]);
+
+            // Fill the remaining length
+            for (let i = password.length; i < length; i++) {
+                password.push(chars[Math.floor(Math.random() * chars.length)]);
+            }
+
+            // Shuffle the password
+            password = password.sort(() => Math.random() - 0.5);
+
+            // Display the password
+            document.getElementById('passwordOutput').innerText = password.join('');
+        }
+    </script>
+</body>
+</html>

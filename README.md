@@ -18,7 +18,8 @@ A modern web browser (e.g., Chrome, Firefox, Edge).
 
 Local Setup
 
-Clone the repository or download the project files:git clone https://github.com/your-username/password-generator.git
+Clone the repository or download the project files:git clone https://snehithamuddam.github.io/Micro-IT-Internship./
+
 
 
 Open the index.html file in a browser to use the application locally.
@@ -40,7 +41,8 @@ This project is deployed on GitHub Pages. To deploy your own version:
 Push your project to a GitHub repository:git init
 git add .
 git commit -m "Initial commit"
-git remote add origin https://github.com/Snehithamuddam/password-generator.git
+git remote add origin https://snehithamuddam.github.io/Micro-IT-Internship./
+
 git branch -M main
 git push -u origin main
 
@@ -52,7 +54,8 @@ Set the source to Deploy from a branch, select the main branch, and choose the /
 Save the settings.
 
 
-Access your deployed site at https://Snehithamuddam.github.io/password-generator/.
+Access your deployed site at https://snehithamuddam.github.io/Micro-IT-Internship./
+
 
 Contributing
 Contributions are welcome! To contribute:
